@@ -16,7 +16,7 @@ public class MovementController : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("Horizontal", movement.x);
@@ -30,14 +30,11 @@ public class MovementController : MonoBehaviour
         }
         if(Input.GetButtonDown("Jump"))
         {
-         rb.AddForce(new Vector2(rb.velocity.x, jumpforce));
+        rb.AddForce(new Vector2(0f, jumpforce));
         }
  
-
+rb.MovePosition(rb.position + movement * movementspeed * Time.fixedDeltaTime);
     }
 
-    void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + movement * movementspeed * Time.fixedDeltaTime);
-    }
+
 }
