@@ -450,6 +450,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 455386422203548306}
   movementspeed: 8
+  defaultSpeed: 5
+  boostedSpeed: 10
   jumpforce: 10
   rb: {fileID: 455386422203548309}
   isJumping: 0
+  isCrouching: 0
+  isRunning: 0
