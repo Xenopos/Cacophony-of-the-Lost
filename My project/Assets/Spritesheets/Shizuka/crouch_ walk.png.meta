@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 75757e57767a5da47857a8fce7bd4d66
+guid: b796083d34b74684cacd2706c308cbbb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,85 +105,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crouch_ walk_rev_0
+      name: crouch_ walk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 69
         height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd186e384c1e0544c9652d1e6d96dfd5
-      internalID: -1046670446
+      spriteID: 924e99e7362818749bb2d0edb717646a
+      internalID: 773734624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouch_ walk_rev_1
+      name: crouch_ walk_1
       rect:
         serializedVersion: 2
         x: 69
         y: 0
         width: 69
         height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee281df86f563674299e76201e2f6b93
-      internalID: -605463125
+      spriteID: cd23bccc1bba28842adc7b1dd0d32959
+      internalID: -959735662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouch_ walk_rev_2
+      name: crouch_ walk_2
       rect:
         serializedVersion: 2
         x: 138
         y: 0
         width: 69
         height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44ed4dc05d5357d4c9f6d27a5972ad89
-      internalID: 1133099112
+      spriteID: 4e5b6f5ddf2afdd4eb1162e4f518ccf3
+      internalID: 344018352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouch_ walk_rev_3
+      name: crouch_ walk_3
       rect:
         serializedVersion: 2
         x: 207
         y: 0
         width: 69
         height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f54aece9b190c94192d53de9ab296dd
-      internalID: -265792473
+      spriteID: 16e6545db4c0be64ab63c016ba94e4e5
+      internalID: 1876965359
       vertices: []
       indices: 
       edges: []
@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      crouch_ walk_rev_0: -1046670446
-      crouch_ walk_rev_1: -605463125
-      crouch_ walk_rev_2: 1133099112
-      crouch_ walk_rev_3: -265792473
+      crouch_ walk_0: 773734624
+      crouch_ walk_1: -959735662
+      crouch_ walk_2: 344018352
+      crouch_ walk_3: 1876965359
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

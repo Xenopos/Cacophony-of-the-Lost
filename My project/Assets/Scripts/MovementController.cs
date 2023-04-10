@@ -12,8 +12,8 @@ public class MovementController : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 movement;
     public bool isJumping;
-    public bool isCrouching;
-    public bool isRunning; // new variable for storing whether the player is running
+    public bool isRunning;
+    public bool isCrouching; // new variable for storing whether the player is crouching
 
     void Start()
     {
@@ -25,12 +25,22 @@ public class MovementController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             movementspeed = boostedSpeed;
-            isRunning = true; // Set isRunning to true when shift key is held down
+            isRunning = true;
         }
         else
         {
             movementspeed = defaultSpeed;
-            isRunning = false; // Set isRunning to false when shift key is released
+            isRunning = false;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            isCrouching = true;
+            movementspeed = defaultSpeed / 2f; // Set movement speed to half of default speed when crouching
+        }
+        else
+        {
+            isCrouching = false;
         }
 
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -38,13 +48,23 @@ public class MovementController : MonoBehaviour
         animator.SetFloat("speed", movement.sqrMagnitude);
 
         // Check if the player is running and trigger the running animation if true
-        if (isRunning && !isJumping)
+        if (isRunning && !isJumping && !isCrouching)
         {
             animator.SetBool("isRunning", true);
         }
         else
         {
             animator.SetBool("isRunning", false);
+        }
+
+        // Check if the player is crouching and trigger the crouching animation if true
+        if (isCrouching)
+        {
+            animator.SetTrigger("isCrouching");
+        }
+        else
+        {
+            animator.ResetTrigger("isCrouching");
         }
 
         if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1)
@@ -56,18 +76,8 @@ public class MovementController : MonoBehaviour
             rb.AddForce(new Vector2(0f, jumpforce));
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            isCrouching = !isCrouching;
-            animator.SetBool("isCrouching", isCrouching);
-        }
-
-        // If the player is crouching, reduce their movement speed
-        if (isCrouching)
-        {
-            defaultSpeed *= 0.5f;
-        }
-
         rb.MovePosition(rb.position + movement * movementspeed * Time.fixedDeltaTime);
     }
+
+    
 }

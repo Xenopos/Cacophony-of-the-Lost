@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b796083d34b74684cacd2706c308cbbb
+guid: 2bb916d3f5427c24f8c78fb248d072c8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crouch_ walk_0
+      name: walk_rev_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 69
-        height: 65
+        width: 38
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 924e99e7362818749bb2d0edb717646a
-      internalID: 773734624
+      spriteID: bc2448a9b892d534ea66708b9d01cf40
+      internalID: 1098577611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouch_ walk_1
+      name: walk_rev_1
       rect:
         serializedVersion: 2
-        x: 69
+        x: 38
         y: 0
-        width: 69
-        height: 65
+        width: 38
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd23bccc1bba28842adc7b1dd0d32959
-      internalID: -959735662
+      spriteID: 743b724067e2704479ca3fb75107a246
+      internalID: 1934567699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouch_ walk_2
+      name: walk_rev_2
       rect:
         serializedVersion: 2
-        x: 138
+        x: 76
         y: 0
-        width: 69
-        height: 65
+        width: 38
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e5b6f5ddf2afdd4eb1162e4f518ccf3
-      internalID: 344018352
+      spriteID: 1c4e3ba00b8396d46929d7f7d285c706
+      internalID: -360765906
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouch_ walk_3
+      name: walk_rev_3
       rect:
         serializedVersion: 2
-        x: 207
+        x: 114
         y: 0
-        width: 69
-        height: 65
+        width: 38
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +182,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16e6545db4c0be64ab63c016ba94e4e5
-      internalID: 1876965359
+      spriteID: aaaf23a1722dafa4abf9b6df992e5a7b
+      internalID: -167322202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_rev_4
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 0
+        width: 38
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4c7b007574441a43a841fc0e6b86198
+      internalID: 69662938
       vertices: []
       indices: 
       edges: []
@@ -199,10 +220,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      crouch_ walk_0: 773734624
-      crouch_ walk_1: -959735662
-      crouch_ walk_2: 344018352
-      crouch_ walk_3: 1876965359
+      walk_rev_0: 1098577611
+      walk_rev_1: 1934567699
+      walk_rev_2: -360765906
+      walk_rev_3: -167322202
+      walk_rev_4: 69662938
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
