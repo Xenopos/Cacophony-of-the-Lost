@@ -5,6 +5,10 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     private Animator animator; 
+    public EnemyAttack enemyAttack;
+    public MovementController playerMovement;
+    private BoxCollider2D movementCollider;
+
 
     // Chase
     public GameObject player;
@@ -12,16 +16,19 @@ public class EnemyMovement : MonoBehaviour
     private float distanceFromPlayer;
     public float chaseSpeed = 10.0f; 
     public float chaseRadius = 2.0f;
+    public bool hasChased = false;
 
     // Patrol
     Rigidbody2D myRigidBody;
     private bool isMoving = true;
     private float initialPosition; 
-    private bool isGoingLeft = true;
+    public bool isGoingLeft = true;
     private bool isPatrolling = true;
     public float patrolSpeed = 2.0f;
     public float patrolRadius = 5.0f;
     public float patrolWaitTime = 2.0f;
+
+    // Attack
 
     void Start() {
         initialPosition = transform.position.x;
@@ -29,68 +36,82 @@ public class EnemyMovement : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody2D>();
     }
 
-    void Update() {        
-        CheckPlayerDistance();
-
-        if (!isMoving) return;
-        
-        if (!isChasing) {
-            Patrol();
-        } else if (isChasing) {
-            Chase();
-        } 
-
+    void Update() {   
+        if (enemyAttack.isAttacking) return;    
+        // if (!isMoving) return;
+        CheckState();
     }
     
-    /*
-        @brief: Makes the enemy patrol back and forth about a radius
-
-        @param: None
-
-        @return: None
-    */
-    void Patrol() {
-        float distanceFromStart = transform.position.x - initialPosition;
-        if (isPatrolling) {
-            if (isGoingLeft) {
-                if (distanceFromStart <= -patrolRadius) {
-                    StartCoroutine(WaitAndTurnAround());
-                }
-                myRigidBody.velocity = new Vector2(-patrolSpeed, 0f);
-            }
-            else {
-                if (distanceFromStart >= patrolRadius) {
-                    StartCoroutine(WaitAndTurnAround());
-                }
-                myRigidBody.velocity = new Vector2(patrolSpeed, 0f);
-            }
+    void CheckState() {
+        // if (playerMovement.isCrouching) {
+        //     movementCollider.enabled = false; 
+        // } else {
+        //     movementCollider.enabled = true;
+        // }
+        
+        distanceFromPlayer = Vector2.Distance(transform.position, player.transform.position);
+        if (distanceFromPlayer < chaseRadius && IsPlayerFacingEnemy() && distanceFromPlayer > enemyAttack.attackRadius) {
+            Debug.Log("Chase");
+            Debug.Log(distanceFromPlayer);
+            Debug.Log(enemyAttack.attackRadius);
+            Debug.Log(distanceFromPlayer > enemyAttack.attackRadius);
+            OnChase();
+        } else if ((distanceFromPlayer >= chaseRadius || !IsPlayerFacingEnemy()) && !hasChased) {
+            OnPatrol();
+        } else if (hasChased && !enemyAttack.isAttacking && IsPlayerFacingEnemy() && distanceFromPlayer > enemyAttack.attackRadius) {
+            Debug.Log("Chase hasChased");
+            OnChase();
         }
     }
-    
-    /*
-        @brief: Checks if the player is within the chase radius and facing the enemy
 
-        @param: None
-
-        @return: None
-    */
-    void CheckPlayerDistance() {
-        distanceFromPlayer = Vector2.Distance(transform.position, player.transform.position);
-        if (distanceFromPlayer < chaseRadius && IsPlayerFacingEnemy()) {
-            isChasing = true;
-
+    void OnChase() {
+        if (!isMoving) {
             StopCoroutine(WaitAndTurnAround());
+
+            if (!IsPlayerFacingEnemy()) {
+                isGoingLeft = !isGoingLeft;
+                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            }
+
             isMoving = true;
-        } 
+        }
+
+        isPatrolling = false;
+        isChasing = true;
+        animator.SetBool("isChasing", true);
+        hasChased = true;
+
+        if (player.transform.position.x < transform.position.x) {
+            animator.SetBool("isGoingLeft", true);
+        } else {
+            animator.SetBool("isGoingLeft", false);
+        }
+
+        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
     }
 
-    /*
-        @brief: Checks if the player is facing the enemy
+    void OnPatrol() {
+        if (!isMoving) return;
 
-        @param: None
+        isPatrolling = true;
+        isChasing = false;
+        animator.SetBool("isChasing", false);
 
-        @return: bool
-    */
+        float distanceFromStart = transform.position.x - initialPosition;
+        if (isGoingLeft) {
+            if (distanceFromStart <= -patrolRadius) {
+                StartCoroutine(WaitAndTurnAround());
+            }
+            myRigidBody.velocity = new Vector2(-patrolSpeed, 0f);
+        }
+        else {
+            if (distanceFromStart >= patrolRadius) {
+                StartCoroutine(WaitAndTurnAround());
+            }
+            myRigidBody.velocity = new Vector2(patrolSpeed, 0f);
+        }
+    }
+
     private bool IsPlayerFacingEnemy()
     {
         Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
@@ -98,32 +119,20 @@ public class EnemyMovement : MonoBehaviour
         return dotProduct < 0f;
     }
 
-    /*
-        @brief: Makes the enemy chase the player nonstop
-
-        @param: None
-
-        @return: None
-    */
-    void Chase() {
-        isPatrolling = false;
-        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
-    }
-
-    /*
-        @brief: Makes the enemy wait for a certain amount of time and then turn around
-
-        @param: None
-
-        @return: None
-    */
-    IEnumerator WaitAndTurnAround() {
+    public IEnumerator WaitAndTurnAround() {
         isMoving = false;
         yield return new WaitForSeconds(patrolWaitTime);
 
         if (isPatrolling) {
             Debug.Log("Turning around");
             isGoingLeft = !isGoingLeft;
+
+            if (isGoingLeft) {
+                animator.SetBool("isGoingLeft", true);
+            } else {
+                animator.SetBool("isGoingLeft", false);
+            }
+
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
         isMoving = true;
