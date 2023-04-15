@@ -4,81 +4,96 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float speed = 2.0f; // Movement speed
-    public float distance = 5.0f; // Distance to move before turning around
-    public float waitTime = 2.0f; // Time to wait before turning around
+    private Animator animator; 
 
-    private float initialPosition; // Starting position
-    private float moveX; // Current movement direction
-    private bool isWaiting = false; // Flag to indicate if the enemy is waiting to turn around
+    // General
+    private bool isMoving = true;
+    private float initialPosition; 
 
-    private Animator animator; // Animator component
+    // Chase
+    public GameObject player;
+    private bool isChasing = false;
+    private float distanceFromPlayer;
+    public float chaseSpeed = 3.0f; 
+    public float chaseRadius = 2.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    // Patrol
+    Rigidbody2D myRigidBody;
+    private bool isGoingLeft = true;
+    public float patrolSpeed = 2.0f;
+    public float patrolRadius = 5.0f;
+    public float waitTime = 2.0f;
+
+    void Start() {
         initialPosition = transform.position.x;
-        moveX = 1.0f; // Start moving towards the maximum distance
-
         animator = GetComponent<Animator>();
+        myRigidBody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Move the enemy horizontally
-        transform.Translate(new Vector3(moveX * speed * Time.deltaTime, 0.0f, 0.0f));
+    void Update() {        
+        if (!isMoving) return;
+        
+        if (!isChasing) {
+            Patrol();
+        } else if (isChasing) {
+            Chase();
+        }
 
-        // Check if the enemy has reached the maximum distance or returned to the initial position
-        if (Mathf.Abs(transform.position.x - initialPosition) >= distance && moveX > 0.0f)
-        {
-            // Stop moving and wait for a few seconds
-            if (!isWaiting)
-            {
-                moveX = 0.0f;
-                isWaiting = true;
+        CheckChasing();
+    }
+
+    void Patrol() {
+        float distanceFromStart = transform.position.x - initialPosition;
+        if (isGoingLeft) {
+            if (distanceFromStart <= -patrolRadius) {
                 StartCoroutine(WaitAndTurnAround());
             }
+            myRigidBody.velocity = new Vector2(-patrolSpeed, 0f);
         }
-        else if (Mathf.Abs(transform.position.x - initialPosition) < 0.1f && moveX < 0.0f)
-        {
-            // Stop moving and wait for a few seconds
-            if (!isWaiting)
-            {
-                moveX = 0.0f;
-                isWaiting = true;
+        else {
+            if (distanceFromStart >= patrolRadius) {
                 StartCoroutine(WaitAndTurnAround());
             }
+            myRigidBody.velocity = new Vector2(patrolSpeed, 0f);
         }
-
-        // Set the animation parameters
-        animator.SetFloat("MoveX", moveX);
-
-        if (moveX == 1 || moveX == -1)
-        {
-        animator.SetFloat("LastMoveX", moveX);
-        }
-
-
-        // Update the movement direction
-        if (!isWaiting)
-        {
-            if (Mathf.Abs(transform.position.x - initialPosition) >= distance)
-            {
-                moveX = -1.0f;
-            }
-            else if (Mathf.Abs(transform.position.x - initialPosition) < 0.1f)
-            {
-                moveX = 1.0f;
-            }
+    }
+    
+    void CheckChasing() {
+        distanceFromPlayer = Vector2.Distance(transform.position, player.transform.position);
+        if (distanceFromPlayer < chaseRadius && IsPlayerFacingEnemy()) {
+            isChasing = true;
+        } else {
+            isChasing = false;
         }
     }
 
-    // Coroutine to wait for a few seconds and turn around
-    IEnumerator WaitAndTurnAround()
+    private bool IsPlayerFacingEnemy()
     {
+        Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
+        float dotProduct = Vector2.Dot(directionToPlayer, transform.localScale);
+        return dotProduct < 0f;
+    }
+
+    void Chase() {
+        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
+        AfterChase();
+    }
+
+    void AfterChase() {
+        initialPosition = transform.position.x;
+    }
+
+    IEnumerator WaitAndTurnAround() {
+        isMoving = false;
         yield return new WaitForSeconds(waitTime);
-        moveX = -moveX;
-        isWaiting = false;
+        isGoingLeft = !isGoingLeft;
+
+        if (isGoingLeft) {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        } else {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        
+        isMoving = true;
     }
 }
