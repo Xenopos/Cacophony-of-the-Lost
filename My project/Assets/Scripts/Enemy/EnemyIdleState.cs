@@ -23,6 +23,15 @@ public class EnemyIdleState : EnemyBaseState {
     public override void ExitState(EnemyStateManager enemy) {
 
     }
+
+    // public override void OnCollisionEnter2D(EnemyStateManager enemy, Collision2D collision) {
+
+    // }
+
+    public override void OnTriggerEnter2D(EnemyStateManager enemy, Collider2D collider) {
+        
+    }
+
     public override void UpdateState(EnemyStateManager enemy) {
         // Increase timer
         idleTimer += Time.deltaTime;

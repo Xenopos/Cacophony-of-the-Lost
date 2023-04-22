@@ -13,6 +13,7 @@ public class EnemyStateManager : MonoBehaviour {
     public Rigidbody2D myRigidBody;
     public Animator myAnimator;
     public GameObject player;
+    public CircleCollider2D myCollider;
 
     public bool patrolDirection = true; // true = right, false = left
     public float patrolRadius = 5f;
@@ -21,15 +22,24 @@ public class EnemyStateManager : MonoBehaviour {
     public float patrolSpeed = 1f;
     public float chaseSpeed = 2f;
     public float damage = 1f;
-    public float attackDelay = 1f;
+    public float attackCooldown = 1f;
 
     public void Start() {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myCollider = GetComponent<CircleCollider2D>();
         player = GameObject.Find("Player");
 
         currentState = PatrolState;
         currentState.EnterState(this);
+    }
+
+    // void OnCollisionEnter2D(Collision2D collision) {
+    //     currentState.OnCollisionEnter2D(this, collision);
+    // }
+
+    void OnTriggerEnter2D(Collider2D collider) {
+        currentState.OnTriggerEnter2D(this, collider);
     }
 
     public void Update() {
