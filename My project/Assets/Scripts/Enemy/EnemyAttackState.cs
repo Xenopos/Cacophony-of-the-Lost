@@ -19,6 +19,7 @@ public class EnemyAttackState : EnemyBaseState {
         attackCooldown = enemy.attackCooldown;
         damage = enemy.damage;
         canAttack = true;
+        attackCollider.enabled = true;
 
         // Stop movement
         enemy.myRigidBody.velocity = Vector2.zero;
@@ -60,8 +61,6 @@ public class EnemyAttackState : EnemyBaseState {
     }   
 
     public override void OnTriggerEnter2D(EnemyStateManager enemy, Collider2D collision) {        
-        Debug.Log(collision.name);
-        // Check if the collision is with the player
         if (collision.CompareTag("Player")) {
             // Check if the enemy can attack based on cooldown
             if (canAttack) {
