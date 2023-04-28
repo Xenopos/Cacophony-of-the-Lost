@@ -23,6 +23,7 @@ public class EnemyAttackState : EnemyBaseState {
 
         // Stop movement
         enemy.myRigidBody.velocity = Vector2.zero;
+        enemy.currentSpeed = 0f;
 
         // Set timer
         attackTimer = 0f;

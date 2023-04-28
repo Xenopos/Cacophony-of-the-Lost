@@ -11,6 +11,9 @@ public class EnemyChaseState : EnemyBaseState {
 
         // Set chase speed
         chaseSpeed = enemy.chaseSpeed;
+        enemy.currentSpeed = chaseSpeed;
+
+        enemy.patrolDirection = enemy.transform.position.x < enemy.player.transform.position.x ? true : false;
 
         // Set chase animation
         enemy.myAnimator.SetBool("isChasing", true);

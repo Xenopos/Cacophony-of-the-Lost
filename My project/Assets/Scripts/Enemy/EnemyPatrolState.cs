@@ -17,15 +17,7 @@ public class EnemyPatrolState : EnemyBaseState {
         patrolSpeed = enemy.patrolSpeed;
         patrolRadius = enemy.patrolRadius;
 
-        enemy.myAnimator.SetBool("isWalking", true);
-        if (patrolDirection) {
-            Debug.Log("Patrol Right");
-            enemy.myAnimator.SetBool("isFacingRight", true);
-        }
-        else {
-            Debug.Log("Patrol Left");
-            enemy.myAnimator.SetBool("isFacingRight", false);
-        }
+        enemy.currentSpeed = patrolSpeed;
     }
 
     public override void ExitState(EnemyStateManager enemy) {
@@ -48,18 +40,11 @@ public class EnemyPatrolState : EnemyBaseState {
         Debug.Log("Distance from player: " + distanceFromPlayer);
         Debug.Log("Is player facing enemy: " + isPlayerFacingEnemy);
         if (Mathf.Abs(distanceFromPlayer) <= enemy.chaseRadius && isPlayerFacingEnemy && !isPlayerCrouching) {
-            // Reset patrol animation
-            enemy.myAnimator.SetBool("isWalking", false);
-
             // Switch to chase state
             enemy.SwitchState(enemy.ChaseState);
         }
-
         // Check if enemy is out of patrol radius
         if (Mathf.Abs(distanceFromStart) >= patrolRadius) {
-            // Reset patrol animation
-            enemy.myAnimator.SetBool("isWalking", false);
-
             // Switch to idle state
             enemy.SwitchState(enemy.IdleState);
         }

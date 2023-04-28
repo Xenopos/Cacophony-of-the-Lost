@@ -1446,6 +1446,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9dcae95bfaab6e4ba5f46438df96584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1588665155 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7374725137073320608, guid: 5e453c41fc169114493282320859e6d1, type: 3}
+  m_PrefabInstance: {fileID: 7374725136392362445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1769532664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,6 +2044,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2078191568}
+    - target: {fileID: 5548461951278126003, guid: 5e453c41fc169114493282320859e6d1, type: 3}
+      propertyPath: chaseSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548461951278126003, guid: 5e453c41fc169114493282320859e6d1, type: 3}
+      propertyPath: myAnimator
+      value: 
+      objectReference: {fileID: 1588665155}
     - target: {fileID: 5548461951278126003, guid: 5e453c41fc169114493282320859e6d1, type: 3}
       propertyPath: playerStateManager
       value: 

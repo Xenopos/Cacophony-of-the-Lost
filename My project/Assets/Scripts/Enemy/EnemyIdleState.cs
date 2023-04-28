@@ -8,16 +8,10 @@ public class EnemyIdleState : EnemyBaseState {
     private float idleTimer = 0f;
 
     public override void EnterState(EnemyStateManager enemy) {
-        Debug.Log("Idle");
-        
-        // Timer start for idle duration
+        Debug.Log("Idle");        
         idleTimer = 0f;
-
-        // Stop movement
         enemy.myRigidBody.velocity = Vector2.zero;
-
-        // Set idle animation
-        enemy.myAnimator.SetBool("isIdle", true);
+        enemy.currentSpeed = 0f;
     }
 
     public override void ExitState(EnemyStateManager enemy) {
@@ -30,29 +24,12 @@ public class EnemyIdleState : EnemyBaseState {
 
     public override void UpdateState(EnemyStateManager enemy) {
         idleTimer += Time.deltaTime;
-
-        // Check if player is in chase radius and if enemy is facing player
         float distanceFromPlayer = Vector2.Distance(enemy.transform.position, enemy.player.transform.position);
         if (distanceFromPlayer <= enemy.chaseRadius && enemy.IsPlayerFacingEnemy() && !enemy.IsPlayerCrouching()) {
-            // Reset idle animation
-            enemy.myAnimator.SetBool("isIdle", false);
-
-            // Switch to chase state
             enemy.SwitchState(enemy.ChaseState);
         }
-        
-        // Check if idle duration has been reached
         if (idleTimer >= idleDuration) {
-            // Reverse patrol direction
             enemy.patrolDirection = !enemy.patrolDirection;
-
-            // Reverse local scale
-            enemy.transform.localScale = new Vector2(-enemy.transform.localScale.x, enemy.transform.localScale.y);
-
-            // Reset idle animation
-            enemy.myAnimator.SetBool("isIdle", false);
-            
-            // Switch to patrol state
             enemy.SwitchState(enemy.PatrolState);
         }
     }

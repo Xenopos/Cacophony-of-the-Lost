@@ -21,8 +21,9 @@ public class EnemyStateManager : MonoBehaviour {
     public float patrolRadius = 5f;
     public float chaseRadius = 3f;
     public float attackRadius = 1.4f;
-    public float patrolSpeed = 1f;
+    public float patrolSpeed = 3f;
     public float chaseSpeed = 2f;
+    public float currentSpeed;
     public float damage = 1f;
     public float attackCooldown = 1f;
     public float health;
@@ -46,6 +47,8 @@ public class EnemyStateManager : MonoBehaviour {
     }
 
     public void FixedUpdate() {
+        SetSpeed();
+        SetDirection();
         currentState.UpdateState(this);
     }
 
@@ -79,6 +82,19 @@ public class EnemyStateManager : MonoBehaviour {
         if (health <= 0) {
             Debug.Log("Enemy died");
             Destroy(gameObject);
+        }
+    }
+
+    public void SetSpeed() {
+        myAnimator.SetFloat("Speed", currentSpeed);
+        myAnimator.SetFloat("Horizontal", currentSpeed);
+    }
+
+    public void SetDirection() {
+        if (patrolDirection) {
+            myAnimator.SetFloat("Direction", 1);
+        } else {
+            myAnimator.SetFloat("Direction", -1);
         }
     }
 }
