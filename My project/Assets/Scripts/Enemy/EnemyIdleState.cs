@@ -24,22 +24,18 @@ public class EnemyIdleState : EnemyBaseState {
 
     }
 
-    // public override void OnCollisionEnter2D(EnemyStateManager enemy, Collision2D collision) {
-
-    // }
-
     public override void OnTriggerEnter2D(EnemyStateManager enemy, Collider2D collider) {
         
     }
 
     public override void UpdateState(EnemyStateManager enemy) {
-        // Increase timer
         idleTimer += Time.deltaTime;
 
         // Check if player is in chase radius and if enemy is facing player
         float distanceFromPlayer = Vector2.Distance(enemy.transform.position, enemy.player.transform.position);
-        if (distanceFromPlayer <= enemy.chaseRadius && enemy.IsPlayerFacingEnemy()) {
+        if (distanceFromPlayer <= enemy.chaseRadius && enemy.IsPlayerFacingEnemy() && !enemy.IsPlayerCrouching()) {
             // Reset idle animation
+            enemy.myAnimator.SetBool("isIdle", false);
 
             // Switch to chase state
             enemy.SwitchState(enemy.ChaseState);
@@ -49,6 +45,9 @@ public class EnemyIdleState : EnemyBaseState {
         if (idleTimer >= idleDuration) {
             // Reverse patrol direction
             enemy.patrolDirection = !enemy.patrolDirection;
+
+            // Reverse local scale
+            enemy.transform.localScale = new Vector2(-enemy.transform.localScale.x, enemy.transform.localScale.y);
 
             // Reset idle animation
             enemy.myAnimator.SetBool("isIdle", false);

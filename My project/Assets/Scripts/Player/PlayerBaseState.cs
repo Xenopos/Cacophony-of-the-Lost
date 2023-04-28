@@ -7,5 +7,8 @@ namespace Player {
         public abstract void OnTriggerEnter2D(PlayerStateManager player, Collider2D collider);
         public abstract void UpdateState(PlayerStateManager player);
         public abstract void ExitState(PlayerStateManager player);
+        private void FixedUpdate(PlayerStateManager player) {
+            UpdateState(player);
+        }
     } 
 }

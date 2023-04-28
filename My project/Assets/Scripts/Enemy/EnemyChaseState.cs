@@ -13,6 +13,7 @@ public class EnemyChaseState : EnemyBaseState {
         chaseSpeed = enemy.chaseSpeed;
 
         // Set chase animation
+        enemy.myAnimator.SetBool("isChasing", true);
     }
 
     public override void ExitState(EnemyStateManager enemy) {
@@ -29,15 +30,12 @@ public class EnemyChaseState : EnemyBaseState {
         float distanceFromPlayer = Vector2.Distance(enemy.transform.position, enemy.player.transform.position);
         if (distanceFromPlayer <= enemy.attackRadius && enemy.IsPlayerFacingEnemy()) {
             // Reset chase animation
+            enemy.myAnimator.SetBool("isChasing", false);
 
             // Switch to attack state
             enemy.SwitchState(enemy.AttackState);
         }
     }
-
-    // public override void OnCollisionEnter2D(EnemyStateManager enemy, Collision2D collision) {
-
-    // }
     
     public override void OnTriggerEnter2D(EnemyStateManager enemy, Collider2D collider) {
         

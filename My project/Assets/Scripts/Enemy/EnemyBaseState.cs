@@ -7,5 +7,8 @@ namespace Enemy {
         public abstract void OnTriggerEnter2D(EnemyStateManager enemy, Collider2D collider);
         public abstract void UpdateState(EnemyStateManager enemy);
         public abstract void ExitState(EnemyStateManager enemy);
+        private void FixedUpdate(EnemyStateManager enemy) {
+            UpdateState(enemy);
+        }
     } 
 }

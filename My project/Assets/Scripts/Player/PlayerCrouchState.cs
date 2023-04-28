@@ -6,11 +6,8 @@ using Player;
 public class PlayerCrouchState : PlayerBaseState {
     public override void EnterState(PlayerStateManager player) {
         Debug.Log("Crouch");
-
-        // Set direction
-        player.direction = Input.GetAxisRaw("Horizontal") == 1 ? true : false;
-
-        // Set crouch animation
+        player.currentSpeed = player.crouchSpeed;
+        player.myAnimator.SetTrigger("isCrouching");
     }
 
     public override void ExitState(PlayerStateManager player) {
@@ -24,28 +21,23 @@ public class PlayerCrouchState : PlayerBaseState {
     public override void UpdateState(PlayerStateManager player) {
         if (Input.GetKey(KeyCode.LeftControl)) {
             if (Input.GetAxisRaw("Horizontal") != 0) {
-                // Update direction
+                player.currentSpeed = player.crouchSpeed;
                 player.direction = Input.GetAxisRaw("Horizontal") == 1 ? true : false;
 
-                // Crouch to direction
                 if (player.direction) {
                     Debug.Log("Crouch right");
-
                     player.myRigidBody.velocity = new Vector2(player.crouchSpeed, player.myRigidBody.velocity.y);
                 }
                 else {
                     Debug.Log("Crouch left");
-
                     player.myRigidBody.velocity = new Vector2(-player.crouchSpeed, player.myRigidBody.velocity.y);
                 }
             } else {
-                // Stop movement
                 player.myRigidBody.velocity = Vector2.zero;
+                player.currentSpeed = 0f;
             } 
         } else {
-            // Reset crouch animation
-
-            // Switch to idle state
+            player.myAnimator.ResetTrigger("isCrouching");
             player.SwitchState(player.IdleState);
         }
     }

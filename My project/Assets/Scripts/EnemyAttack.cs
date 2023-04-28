@@ -59,7 +59,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player hit");
+            //Debug.Log("Player hit");
             playerHealth.TakeDamage(damage);
         }
     }

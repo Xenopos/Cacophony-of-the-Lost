@@ -28,6 +28,7 @@ public class EnemyAttackState : EnemyBaseState {
         attackTimer = 0f;
 
         // Set attack animation
+        enemy.myAnimator.SetBool("isAttacking", true);
     }
 
     public override void ExitState(EnemyStateManager enemy) {
@@ -54,6 +55,7 @@ public class EnemyAttackState : EnemyBaseState {
         float distanceFromPlayer = Vector2.Distance(enemy.transform.position, enemy.player.transform.position);
         if (distanceFromPlayer > enemy.attackRadius || !enemy.IsPlayerFacingEnemy()) {
             // Reset attack animation
+            enemy.myAnimator.SetBool("isAttacking", false);
 
             // Switch to chase state
             enemy.SwitchState(enemy.ChaseState);
@@ -68,25 +70,12 @@ public class EnemyAttackState : EnemyBaseState {
                 Debug.Log("Enemy is attacking player!");
 
                 // Damage player
+                enemy.playerStateManager.TakeDamage(damage);
 
                 // Set canAttack to false and disable attack colider to prevent multiple attacks
                 canAttack = false;
                 attackCollider.enabled = false;
-
-                // Start cooldown timer
             }
         }
     }
-
-    // public void OnTriggerExit2D(Collider2D other) {
-    //     Debug.Log("Enemy is no longer attacking player!");
-
-    //     // Check if the collision is with the player
-    //     if (other.CompareTag("Player")) {
-    //         Debug.Log("Enemy is no longer attacking player!");
-
-    //         // Reset canAttack to true when the enemy and player colliders stop overlapping
-    //         canAttack = true;
-    //     }
-    // }
 }

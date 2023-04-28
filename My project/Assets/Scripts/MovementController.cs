@@ -36,11 +36,14 @@ public class MovementController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             isCrouching = true;
+            gameObject.layer = LayerMask.NameToLayer("PlayerCrouch");
             movementspeed = defaultSpeed / 2f; // Set movement speed to half of default speed when crouching
         }
         else
         {
             isCrouching = false;
+            gameObject.layer = LayerMask.NameToLayer("Default");
+
         }
 
         movement.x = Input.GetAxisRaw("Horizontal");

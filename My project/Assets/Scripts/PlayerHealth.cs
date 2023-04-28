@@ -20,10 +20,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage) 
     {
-        health -= damage;
-        if (health <= 0) 
-        {
-            Debug.Log(health);
-        }
+        // health -= damage;
+        // if (health <= 0) 
+        // {
+        //     Debug.Log(health);
+        // }
     }
 }
