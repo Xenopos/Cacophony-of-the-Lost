@@ -13,12 +13,11 @@ GameObject:
   - component: {fileID: 7374725137073320614}
   - component: {fileID: 7374725137073320615}
   - component: {fileID: 7374725137073320608}
-  - component: {fileID: 7374725136392362452}
   - component: {fileID: 2903528064609899340}
   - component: {fileID: 5548461951278126003}
   m_Layer: 0
   m_Name: Zed!
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +104,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -124,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.077509955}
+  m_Offset: {x: 0, y: -0.013201296}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -135,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.1550199}
+  m_Size: {x: 1, y: 1.3645548}
   m_EdgeRadius: 0
 --- !u!95 &7374725137073320608
 Animator:
@@ -158,29 +157,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7374725136392362452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7374725137073320618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae4bfee128bf63444b05212a436c4442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyAttack: {fileID: 0}
-  playerMovement: {fileID: 0}
-  player: {fileID: 0}
-  isChasing: 0
-  chaseSpeed: 3
-  chaseRadius: 2
-  hasChased: 0
-  isGoingLeft: 1
-  patrolSpeed: 2
-  patrolRadius: 5
-  patrolWaitTime: 2
 --- !u!58 &2903528064609899340
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -194,9 +170,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.18947649, y: 0}
+  m_Offset: {x: 0.2367053, y: 0}
   serializedVersion: 2
-  m_Radius: 0.48293734
+  m_Radius: 0.53016615
 --- !u!114 &5548461951278126003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidBody: {fileID: 7374725137073320614}
-  myAnimator: {fileID: 0}
+  myAnimator: {fileID: 7374725137073320608}
   player: {fileID: 0}
   myCollider: {fileID: 2903528064609899340}
   playerStateManager: {fileID: 0}
@@ -219,7 +195,8 @@ MonoBehaviour:
   chaseRadius: 3
   attackRadius: 1.4
   patrolSpeed: 3
-  chaseSpeed: 10
+  chaseSpeed: 4
+  currentSpeed: 0
   damage: 1
   attackCooldown: 1
   health: 0
