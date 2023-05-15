@@ -4,10 +4,13 @@ using UnityEngine;
 using Player;
 
 public class PlayerRunState : PlayerBaseState {
+    private float runSpeed = 8f;
+
     public override void EnterState(PlayerStateManager player) {
         Debug.Log("Run");
-        player.currentSpeed = player.runSpeed;
-        player.myAnimator.SetBool("isRunning", true);
+
+        // Set the player's speed to run speed
+        player.currentSpeed = runSpeed;
     }
 
     public override void ExitState(PlayerStateManager player) {
@@ -22,22 +25,18 @@ public class PlayerRunState : PlayerBaseState {
         if (Input.GetKey(KeyCode.LeftShift)) {
             if (Input.GetAxisRaw("Horizontal") != 0) {
                 player.direction = Input.GetAxisRaw("Horizontal") == 1 ? true : false;
+                
                 if (player.direction) {
                     Debug.Log("Run right");
-                    player.myRigidBody.velocity = new Vector2(player.runSpeed, player.myRigidBody.velocity.y);
-                }
-                else {
+                    player.rigidBody.velocity = new Vector2(runSpeed, player.rigidBody.velocity.y);
+                } else {
                     Debug.Log("Run left");
-                    player.myRigidBody.velocity = new Vector2(-player.runSpeed, player.myRigidBody.velocity.y);
+                    player.rigidBody.velocity = new Vector2(-runSpeed, player.rigidBody.velocity.y);
                 }
             } else if (Input.GetAxisRaw("Horizontal") == 0) { 
-                player.myRigidBody.velocity = Vector2.zero;
-                player.currentSpeed = 0f;
-                player.myAnimator.SetBool("isRunning", false);
                 player.SwitchState(player.IdleState);
             }
         } else {
-            player.myAnimator.SetBool("isRunning", false);
             player.SwitchState(player.IdleState);
         } 
     }

@@ -4,17 +4,26 @@ using UnityEngine;
 using Player;
 
 public class PlayerAttackState : PlayerBaseState {
-    private float damage;
-    private bool canAttack;
-    private float attackCooldown; // Cooldown between attacks in seconds
+    private float damage = 3f;
+    private float attackCooldown = 2f; // Cooldown between attacks in seconds
     private float attackTimer = 0f; // Timer to keep track of cooldown
+    private CircleCollider2D attackCollider;
 
     public override void EnterState(PlayerStateManager player) {
         Debug.Log("Attack");
-        attackCooldown = player.attackCooldown;
-        damage = player.damage;
-        canAttack = true;
-        player.myAnimator.SetBool("isAttacking", true);
+
+        // Set variables
+        attackCollider = player.circleCollider;
+
+        // Set the player's animation to attack
+        player.animator.SetBool("isAttacking", true);
+
+        float distanceFromEnemy = Vector2.Distance(player.transform.position, player.enemy.transform.position);
+        if (distanceFromEnemy <= player.attackRadius && player.canAttack) {
+            player.enemyStateManager.TakeDamage(damage);
+            attackCollider.enabled = false;
+            player.canAttack = false;
+        }
     }
 
     public override void ExitState(PlayerStateManager player) {
@@ -23,25 +32,29 @@ public class PlayerAttackState : PlayerBaseState {
 
     public override void OnTriggerEnter2D(PlayerStateManager player, Collider2D collision) {
         if (collision.GetComponent<BoxCollider2D>() != null) {
+            Debug.Log("Player is attacking enemy!");
             if (collision.CompareTag("Enemy")) {
-                if (canAttack) {
-                    if (Input.GetKey(KeyCode.Space)) {
-                        Debug.Log("Player is attacking enemy");
-                        player.enemyStateManager.TakeDamage(damage);
-                    }
+                if (player.canAttack) {
+                    Debug.Log("Player is attacking enemy for real!");
+
+                    // Damage player
+                    player.enemyStateManager.TakeDamage(damage);
+
+                    // Set canAttack to false and disable attack colider to prevent multiple attacks
+                    //canAttack = false;
                 }    
             }
         }
-        player.myAnimator.SetBool("isAttacking", false);
     }
 
     public override void UpdateState(PlayerStateManager player) {
-        attackTimer += Time.deltaTime;
-        if (attackTimer >= attackCooldown) {
-            attackTimer = 0f;
-            canAttack = true;
-        }
-        player.myAnimator.SetBool("isAttacking", false);
+        // attackTimer += Time.deltaTime;
+        // if (attackTimer >= attackCooldown) {
+        //     attackTimer = 0f;
+        //     player.canAttack = true;
+        // }
+
+        player.animator.SetBool("isAttacking", false);
         player.SwitchState(player.IdleState);
     }
 }

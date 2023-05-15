@@ -4,41 +4,54 @@ using UnityEngine;
 using Player;
 
 public class PlayerStateManager : MonoBehaviour {
+    // States 
     public PlayerBaseState currentState;
     public PlayerWalkState WalkState = new PlayerWalkState();
     public PlayerIdleState IdleState = new PlayerIdleState();
     public PlayerAttackState AttackState = new PlayerAttackState();
     public PlayerCrouchState CrouchState = new PlayerCrouchState();
     public PlayerRunState RunState = new PlayerRunState();
+    public PlayerHideState HideState = new PlayerHideState();
 
-    public Rigidbody2D myRigidBody;
-    public Animator myAnimator;
-    public GameObject enemy;
-    public CircleCollider2D myCircleCollider;
+    // Player components
+    public Rigidbody2D rigidBody;
+    public Animator animator;
+    public CircleCollider2D circleCollider;
 
+    // Enemy components 
     public EnemyStateManager enemyStateManager;
+    public GameObject enemy;
 
-    public bool direction = true; // true = right, false = left
-    public float walkSpeed = 5f;
-    public float runSpeed = 10f;
-    public float crouchSpeed = 2f;  
+    // Player variables
+    public bool direction; 
     public float currentSpeed;
-    public float attackCooldown = 1f;
-    public float damage = 1f;
+    public float maxHealth;
     public float health;
-    public float maxHealth = 10f;
+    public float attackRadius;
+    public bool canAttack = true;
+    public float attackCooldown = 2f;
     public float attackTimer = 0f;
+    // public float attackCooldown;
+    // public float attackTimer;
 
-    public void Start() {   
-        myRigidBody = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<Animator>();
-        myCircleCollider = GetComponent<CircleCollider2D>();
+    public void Start() {  
+        // Initialize components
+        rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        circleCollider = GetComponent<CircleCollider2D>();
         enemyStateManager = enemy.GetComponent<EnemyStateManager>();
+        circleCollider.radius = 0.6f;
 
-        myCircleCollider.radius = 0.6f;
-
+        // Initialize variables
+        currentSpeed = 0f;
+        direction = true;
+        maxHealth = 10f;
         health = maxHealth;
-
+        attackRadius = 2f;
+        // attackCooldown = 2f;
+        // attackTimer = 0f;
+        
+        // Initialize current state to IdleState
         currentState = IdleState;
         currentState.EnterState(this);
     }
@@ -48,8 +61,19 @@ public class PlayerStateManager : MonoBehaviour {
     }
 
     public void FixedUpdate() {
-        SetSpeed();
-        SetDirection();
+        if (!canAttack) {
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= attackCooldown) {
+                canAttack = true;
+                attackTimer = 0f;
+            }
+        }
+
+        if (canAttack) {
+            circleCollider.enabled = true;
+        }
+
+        SetAnimatorVariables();
         Set2DColliderOffset();
         currentState.UpdateState(this);
     }
@@ -60,17 +84,24 @@ public class PlayerStateManager : MonoBehaviour {
         currentState.EnterState(this);
     }
 
-    public void SetDirection() {
+    public void SetAnimatorVariables() {
+        // Direction
         if (direction) {
-            myAnimator.SetFloat("Direction", 1);
+            animator.SetFloat("Direction", 1);
         } else {
-            myAnimator.SetFloat("Direction", -1);
+            animator.SetFloat("Direction", -1);
         }
-    }
 
-    public void SetSpeed() {
-        myAnimator.SetFloat("Speed", currentSpeed);
-        myAnimator.SetFloat("Horizontal", currentSpeed);
+        // Speed
+        animator.SetFloat("Speed", currentSpeed);
+        animator.SetFloat("Horizontal", currentSpeed);
+
+        // Attack
+        if (currentState.Equals(AttackState)) {
+            animator.SetBool("isAttacking", true);
+        } else {
+            animator.SetBool("isAttacking", false);
+        }
     }
 
     public void TakeDamage(float damage) {
@@ -87,6 +118,6 @@ public class PlayerStateManager : MonoBehaviour {
         float offset;
         if (!direction) offset = offsetLeft;
         else offset = offsetRight;
-        myCircleCollider.offset = new Vector2(offset, myCircleCollider.offset.y);
+        circleCollider.offset = new Vector2(offset, circleCollider.offset.y);
     }
 }

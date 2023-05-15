@@ -4,40 +4,50 @@ using UnityEngine;
 using Enemy;
 
 public class EnemyStateManager : MonoBehaviour {
-    EnemyBaseState currentState;
+    // States
+    public EnemyBaseState currentState;
     public EnemyIdleState IdleState = new EnemyIdleState();
     public EnemyPatrolState PatrolState = new EnemyPatrolState();
     public EnemyChaseState ChaseState = new EnemyChaseState();
     public EnemyAttackState AttackState = new EnemyAttackState();
+ 
+    // Enemy components
+    public Rigidbody2D rigidBody;
+    public Animator animator;
+    public CircleCollider2D circleCollider;
 
-    public Rigidbody2D myRigidBody;
-    public Animator myAnimator;
+    // Player components
     public GameObject player;
-    public CircleCollider2D myCollider;
-
     public PlayerStateManager playerStateManager; 
 
-    public bool patrolDirection = false; // true = right, false = left
+    public bool direction; // true = right, false = left
+    public float currentSpeed;
+    public float health;
+    public float maxHealth;
+    public float chaseRadius;
+
     public float patrolRadius = 5f;
-    public float chaseRadius = 3f;
     public float attackRadius = 1.4f;
     public float patrolSpeed = 3f;
-    public float chaseSpeed = 2f;
-    public float currentSpeed;
-    public float damage = 1f;
-    public float attackCooldown = 1f;
-    public float health;
-    public float maxHealth = 10f;
+    public float chaseSpeed = 5f;
+    public float deathTimer;
 
     public void Start() {
-        myRigidBody = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<Animator>();
-        myCollider = GetComponent<CircleCollider2D>();
+        // Initialize components
+        rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        circleCollider = GetComponent<CircleCollider2D>();
         player = GameObject.Find("Player");
         playerStateManager = player.GetComponent<PlayerStateManager>();
 
+        // Initialize variables
+        direction = true;
+        currentSpeed = 0f;
+        maxHealth = 10f;
         health = maxHealth;
+        chaseRadius = 3f;
 
+        // Initialize current state to PatrolState
         currentState = PatrolState;
         currentState.EnterState(this);
     }
@@ -47,8 +57,8 @@ public class EnemyStateManager : MonoBehaviour {
     }
 
     public void FixedUpdate() {
-        SetSpeed();
-        SetDirection();
+        SetAnimatorVariables();
+        Set2DColliderOffset();
         currentState.UpdateState(this);
     }
 
@@ -60,7 +70,7 @@ public class EnemyStateManager : MonoBehaviour {
 
     // Helper function to check if enemy is facing player
     public bool IsPlayerFacingEnemy() {
-        return playerStateManager.direction != patrolDirection;
+        return playerStateManager.direction != direction;
     }
 
     // Helper function to check if player is crouching
@@ -70,6 +80,7 @@ public class EnemyStateManager : MonoBehaviour {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
             return true;
         } 
+
         Debug.Log("Player is NOT crouching ESM");
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>(), false);
         return false;
@@ -81,20 +92,33 @@ public class EnemyStateManager : MonoBehaviour {
         Debug.Log("Enemy health: " + health);
         if (health <= 0) {
             Debug.Log("Enemy died");
-            Destroy(gameObject);
+            // GetComponent<Collider2D>().enabled = false;
+            animator.SetBool("isDead", true);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
+            this.enabled = false;
         }
     }
 
-    public void SetSpeed() {
-        myAnimator.SetFloat("Speed", currentSpeed);
-        myAnimator.SetFloat("Horizontal", currentSpeed);
-    }
 
-    public void SetDirection() {
-        if (patrolDirection) {
-            myAnimator.SetFloat("Direction", 1);
+    public void SetAnimatorVariables() {
+        // Direction
+        if (direction) {
+            animator.SetFloat("Direction", 1);
         } else {
-            myAnimator.SetFloat("Direction", -1);
+            animator.SetFloat("Direction", -1);
         }
+
+        // Speed
+        animator.SetFloat("Speed", currentSpeed);
+        animator.SetFloat("Horizontal", currentSpeed);
+    }
+
+    public void Set2DColliderOffset() {
+        float offsetRight = 0.36f;
+        float offsetLeft = -0.5f;
+        float offset;
+        if (!direction) offset = offsetLeft;
+        else offset = offsetRight;
+        circleCollider.offset = new Vector2(offset, circleCollider.offset.y);
     }
 }

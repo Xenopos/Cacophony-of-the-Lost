@@ -4,19 +4,14 @@ using UnityEngine;
 using Enemy;
 
 public class EnemyChaseState : EnemyBaseState {
-    private float chaseSpeed;
+    private float chaseSpeed = 10f;
 
     public override void EnterState(EnemyStateManager enemy) {
         Debug.Log("Chase");
 
         // Set chase speed
-        chaseSpeed = enemy.chaseSpeed;
         enemy.currentSpeed = chaseSpeed;
-
-        enemy.patrolDirection = enemy.transform.position.x < enemy.player.transform.position.x ? true : false;
-
-        // Set chase animation
-        enemy.myAnimator.SetBool("isChasing", true);
+        enemy.direction = enemy.transform.position.x < enemy.player.transform.position.x ? true : false;
     }
 
     public override void ExitState(EnemyStateManager enemy) {
@@ -31,10 +26,7 @@ public class EnemyChaseState : EnemyBaseState {
 
         // Check if player is in attack radius and if enemy is facing player
         float distanceFromPlayer = Vector2.Distance(enemy.transform.position, enemy.player.transform.position);
-        if (distanceFromPlayer <= enemy.attackRadius && enemy.IsPlayerFacingEnemy()) {
-            // Reset chase animation
-            enemy.myAnimator.SetBool("isChasing", false);
-
+        if (distanceFromPlayer < enemy.attackRadius) {
             // Switch to attack state
             enemy.SwitchState(enemy.AttackState);
         }

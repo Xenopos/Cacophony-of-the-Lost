@@ -4,10 +4,14 @@ using UnityEngine;
 using Player;
 
 public class PlayerIdleState : PlayerBaseState {
+    private float idleSpeed = 0f;
+
     public override void EnterState(PlayerStateManager player) {
-        Debug.Log("Idle");
-        player.currentSpeed = 0f;
-        player.myRigidBody.velocity = Vector2.zero;
+        Debug.Log("Idle State");
+
+        // Set the player's speed to idle speed and set the player's velocity to zero
+        player.currentSpeed = idleSpeed;
+        player.rigidBody.velocity = Vector2.zero;
     }
 
     public override void ExitState(PlayerStateManager player) {
