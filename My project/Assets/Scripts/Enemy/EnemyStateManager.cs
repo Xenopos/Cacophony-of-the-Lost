@@ -25,6 +25,7 @@ public class EnemyStateManager : MonoBehaviour {
     public float health;
     public float maxHealth;
     public float chaseRadius;
+    public bool hasChased;
 
     public float patrolRadius = 5f;
     public float attackRadius = 1.4f;
@@ -46,7 +47,8 @@ public class EnemyStateManager : MonoBehaviour {
         maxHealth = 10f;
         health = maxHealth;
         chaseRadius = 3f;
-
+        hasChased = false;
+        
         // Initialize current state to PatrolState
         currentState = PatrolState;
         currentState.EnterState(this);
@@ -75,13 +77,11 @@ public class EnemyStateManager : MonoBehaviour {
 
     // Helper function to check if player is crouching
     public bool IsPlayerCrouching() {
-        if (playerStateManager.currentState == playerStateManager.CrouchState) {
-            Debug.Log("Player is crouching ESM");
+        if (playerStateManager.currentState == playerStateManager.CrouchState || playerStateManager.currentState == playerStateManager.HideState) {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
             return true;
         } 
 
-        Debug.Log("Player is NOT crouching ESM");
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>(), false);
         return false;
     }

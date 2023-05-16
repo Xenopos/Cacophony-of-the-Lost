@@ -8,6 +8,7 @@ public class EnemyChaseState : EnemyBaseState {
 
     public override void EnterState(EnemyStateManager enemy) {
         Debug.Log("Chase");
+        enemy.hasChased = true;
 
         // Set chase speed
         enemy.currentSpeed = chaseSpeed;

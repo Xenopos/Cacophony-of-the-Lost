@@ -14,7 +14,8 @@ public class PlayerHideState : PlayerBaseState {
         player.rigidBody.velocity = Vector2.zero;
 
         // Set the player's animation to hide
-        player.animator.SetBool("isHiding", true);
+        // player.animator.SetBool("isHiding", true);
+        player.animator.SetBool("isCrouching", true);
     }
 
     public override void ExitState(PlayerStateManager player) {
@@ -26,6 +27,6 @@ public class PlayerHideState : PlayerBaseState {
     }
 
     public override void UpdateState(PlayerStateManager player) {
-       
+        
     }
 }
