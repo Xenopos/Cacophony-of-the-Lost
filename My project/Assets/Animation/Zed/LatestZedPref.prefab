@@ -195,6 +195,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 10
   chaseRadius: 3
+  hasChased: 0
   patrolRadius: 5
   attackRadius: 1.4
   patrolSpeed: 3

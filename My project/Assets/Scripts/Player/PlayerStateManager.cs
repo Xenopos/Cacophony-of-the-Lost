@@ -19,8 +19,7 @@ public class PlayerStateManager : MonoBehaviour {
     public CircleCollider2D circleCollider;
 
     // Enemy components 
-    public EnemyStateManager enemyStateManager;
-    public GameObject enemy;
+    public List<EnemyStateManager> enemyStateManagers = new List<EnemyStateManager>();
 
     // Player variables
     public bool direction; 
@@ -39,8 +38,13 @@ public class PlayerStateManager : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         circleCollider = GetComponent<CircleCollider2D>();
-        enemyStateManager = enemy.GetComponent<EnemyStateManager>();
         circleCollider.radius = 0.6f;
+
+        // Initialize enemies
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemyObjects) {
+            enemyStateManagers.Add(enemy.GetComponent<EnemyStateManager>());
+        }
 
         // Initialize variables
         currentSpeed = 0f;

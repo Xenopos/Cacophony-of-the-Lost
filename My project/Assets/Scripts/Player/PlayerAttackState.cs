@@ -18,11 +18,15 @@ public class PlayerAttackState : PlayerBaseState {
         // Set the player's animation to attack
         player.animator.SetBool("isAttacking", true);
 
-        float distanceFromEnemy = Vector2.Distance(player.transform.position, player.enemy.transform.position);
-        if (distanceFromEnemy <= player.attackRadius && player.canAttack) {
-            player.enemyStateManager.TakeDamage(damage);
-            attackCollider.enabled = false;
-            player.canAttack = false;
+        foreach (EnemyStateManager enemy in player.enemyStateManagers) {
+            if (enemy != null) {
+                float distanceFromEnemy = Vector2.Distance(player.transform.position, enemy.transform.position);
+                if (distanceFromEnemy <= player.attackRadius && player.canAttack) {
+                    enemy.TakeDamage(damage);
+                    attackCollider.enabled = false;
+                    player.canAttack = false;
+                }
+            }
         }
     }
 
@@ -31,20 +35,20 @@ public class PlayerAttackState : PlayerBaseState {
     }
 
     public override void OnTriggerEnter2D(PlayerStateManager player, Collider2D collision) {
-        if (collision.GetComponent<BoxCollider2D>() != null) {
-            Debug.Log("Player is attacking enemy!");
-            if (collision.CompareTag("Enemy")) {
-                if (player.canAttack) {
-                    Debug.Log("Player is attacking enemy for real!");
+        // if (collision.GetComponent<BoxCollider2D>() != null) {
+        //     Debug.Log("Player is attacking enemy!");
+        //     if (collision.CompareTag("Enemy")) {
+        //         if (player.canAttack) {
+        //             Debug.Log("Player is attacking enemy for real!");
 
-                    // Damage player
-                    player.enemyStateManager.TakeDamage(damage);
+        //             // Damage player
+        //             player.enemyStateManager.TakeDamage(damage);
 
-                    // Set canAttack to false and disable attack colider to prevent multiple attacks
-                    //canAttack = false;
-                }    
-            }
-        }
+        //             // Set canAttack to false and disable attack colider to prevent multiple attacks
+        //             //canAttack = false;
+        //         }    
+        //     }
+        // }
     }
 
     public override void UpdateState(PlayerStateManager player) {
