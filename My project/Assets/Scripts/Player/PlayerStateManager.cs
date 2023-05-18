@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Player;
 
 public class PlayerStateManager : MonoBehaviour {
@@ -17,6 +18,7 @@ public class PlayerStateManager : MonoBehaviour {
     public Rigidbody2D rigidBody;
     public Animator animator;
     public CircleCollider2D circleCollider;
+    public Slider healthBar;
 
     // Enemy components 
     public List<EnemyStateManager> enemyStateManagers = new List<EnemyStateManager>();
@@ -25,13 +27,15 @@ public class PlayerStateManager : MonoBehaviour {
     public bool direction; 
     public float currentSpeed;
     public float maxHealth;
-    public float health;
+    public static float health = 10f;
     public float attackRadius;
     public bool canAttack = true;
     public float attackCooldown = 2f;
     public float attackTimer = 0f;
     // public float attackCooldown;
     // public float attackTimer;
+    public static float sanityLevel = 100f;
+    public float maxSanityLevel;
 
     public void Start() {  
         // Initialize components
@@ -39,6 +43,7 @@ public class PlayerStateManager : MonoBehaviour {
         animator = GetComponent<Animator>();
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.radius = 0.6f;
+        healthBar = FindObjectOfType<Slider>().GetComponent<Slider>();
 
         // Initialize enemies
         GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
@@ -50,8 +55,10 @@ public class PlayerStateManager : MonoBehaviour {
         currentSpeed = 0f;
         direction = true;
         maxHealth = 10f;
-        health = maxHealth;
+        // health = maxHealth;
         attackRadius = 2f;
+        maxSanityLevel = 100f;
+        // sanityLevel = maxSanityLevel;
         // attackCooldown = 2f;
         // attackTimer = 0f;
         
@@ -77,6 +84,7 @@ public class PlayerStateManager : MonoBehaviour {
             circleCollider.enabled = true;
         }
 
+        UpdateHealthBar();
         SetAnimatorVariables();
         Set2DColliderOffset();
         currentState.UpdateState(this);
@@ -114,6 +122,10 @@ public class PlayerStateManager : MonoBehaviour {
         if (health <= 0) {
             Debug.Log("Player died");
         }
+    }
+
+    public void UpdateHealthBar() {
+        healthBar.value = health;
     }
 
     public void Set2DColliderOffset() {

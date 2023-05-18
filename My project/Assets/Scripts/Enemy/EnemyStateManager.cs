@@ -54,6 +54,7 @@ public class EnemyStateManager : MonoBehaviour {
         currentState.EnterState(this);
     }
 
+
     void OnTriggerEnter2D(Collider2D collider) {
         currentState.OnTriggerEnter2D(this, collider);
     }
@@ -96,6 +97,9 @@ public class EnemyStateManager : MonoBehaviour {
             animator.SetBool("isDead", true);
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
             this.enabled = false;
+            PlayerStateManager.sanityLevel -= 5f;
+            
+            Debug.Log("Sanity level: " + PlayerStateManager.sanityLevel);
         }
     }
 

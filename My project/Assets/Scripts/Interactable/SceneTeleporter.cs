@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Player;
 using Enemy;
 
 namespace Interactable {
-    public class InteractableObject : MonoBehaviour {
+    public class SceneTeleporter : MonoBehaviour {
         private Collider2D collider;
         [SerializeField]
         private ContactFilter2D filter;
         private List<Collider2D> collidedObjects = new List<Collider2D>(1);
-        private bool hasInteracted = false;
 
         public void Start() {
             collider = GetComponent<Collider2D>();
@@ -27,8 +27,11 @@ namespace Interactable {
             Debug.Log("Collided with " + collidedObject.name);
             Physics2D.IgnoreCollision(collider, collidedObject);
 
+            // One clue
+            ClueObject clue = GameObject.Find("Clue").GetComponent<ClueObject>();
+
             if (collidedObject.name == "Player") {
-                if (Input.GetKeyDown(KeyCode.H)) {
+                if (Input.GetKeyDown(KeyCode.E) && clue.isFound) {
                     OnInteract();
                 }
             }
@@ -39,19 +42,10 @@ namespace Interactable {
 
             SpriteRenderer playerSpriteRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
             PlayerStateManager playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>(); 
-            EnemyStateManager enemyStateManager = GameObject.Find("Zed!").GetComponent<EnemyStateManager>();
-
-            // Change player sorting layer to be behind object
-            if (!hasInteracted && enemyStateManager.hasChased == false) {
-                hasInteracted = true;
-                playerSpriteRenderer.sortingOrder = 0;
-                playerStateManager.SwitchState(playerStateManager.HideState);
-            } else {
-                hasInteracted = false;
-                playerSpriteRenderer.sortingOrder = 10;
-                playerStateManager.animator.SetBool("isCrouching", false);
-                playerStateManager.SwitchState(playerStateManager.IdleState);
-            }
+            
+            playerSpriteRenderer.sortingOrder = 0;
+            playerStateManager.SwitchState(playerStateManager.IdleState);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }

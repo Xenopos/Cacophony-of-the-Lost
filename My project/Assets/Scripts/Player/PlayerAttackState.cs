@@ -5,7 +5,7 @@ using Player;
 
 public class PlayerAttackState : PlayerBaseState {
     private float damage = 3f;
-    private float attackCooldown = 2f; // Cooldown between attacks in seconds
+    private float attackCooldown = 0.6f; // Cooldown between attacks in seconds
     private float attackTimer = 0f; // Timer to keep track of cooldown
     private CircleCollider2D attackCollider;
 
@@ -52,13 +52,13 @@ public class PlayerAttackState : PlayerBaseState {
     }
 
     public override void UpdateState(PlayerStateManager player) {
-        // attackTimer += Time.deltaTime;
-        // if (attackTimer >= attackCooldown) {
-        //     attackTimer = 0f;
-        //     player.canAttack = true;
-        // }
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= attackCooldown) {
+            attackTimer = 0f;
+            player.canAttack = true;
+            player.animator.SetBool("isAttacking", false);
+            player.SwitchState(player.IdleState);
+        }
 
-        player.animator.SetBool("isAttacking", false);
-        player.SwitchState(player.IdleState);
     }
 }

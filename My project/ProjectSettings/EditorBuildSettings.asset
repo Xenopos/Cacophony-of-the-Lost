@@ -5,37 +5,43 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 81dfcce6508edb14aad993ee58d109ed
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Mangamandaa.unity
     guid: ecf7120950bcf6b4f9ea74ec2714fc32
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Burns hall.unity
     guid: 34ba07b4064d6d24d99c4b81c9d658ed
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/cutscene1.unity
     guid: 3c56f15b58e5b2e4faf332605c362ac4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Obrien.unity
     guid: a2c3c6390ba485744ab63a12b401215e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dolan.unity
     guid: 406909ee09c079c4ca1a47920cbade62
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Enigneering.unity
     guid: ec6abb329f8e996428a689e5bb12df5b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Likod.unity
     guid: ae4da16dd82ff7c4ead154961920c9e4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Likod Cutscene.unity
     guid: da6de5d05fa6b504fb7e5b1770888a61
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Alingal.unity
     guid: 5dcdabbfb533ee14eb1f644ae70e36f5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ENDINGS.unity
     guid: 9065004ff376a6b48b9e950e258ee9c3
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/TestSceneTp.unity
+    guid: f0bdf093fb2b43a4fa69b8921978545a
   m_configObjects: {}
