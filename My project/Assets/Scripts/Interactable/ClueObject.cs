@@ -38,7 +38,6 @@ namespace Interactable {
         public void OnInteract() {
             Debug.Log("Interacted with Player");
 
-            SpriteRenderer playerSpriteRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
             PlayerStateManager playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>(); 
 
             // Change player sorting layer to be behind object
@@ -46,10 +45,8 @@ namespace Interactable {
                 Debug.Log("Clue found!");
                 hasInteracted = true;
                 isFound = true;
-                playerSpriteRenderer.sortingOrder = 0;
             } else {
                 hasInteracted = false;
-                playerSpriteRenderer.sortingOrder = 10;
             }
         }
     }

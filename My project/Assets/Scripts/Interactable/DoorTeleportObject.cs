@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Player;
 using Enemy;
+using Scene; 
 
 namespace Interactable {
     public class DoorTeleportObject : MonoBehaviour {
@@ -37,12 +38,16 @@ namespace Interactable {
         public void OnInteract() {
             Debug.Log("Interacted with Player");
 
-            SpriteRenderer playerSpriteRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
             PlayerStateManager playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>(); 
-            
-            playerSpriteRenderer.sortingOrder = 0;
             playerStateManager.SwitchState(playerStateManager.IdleState);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+            if (this.gameObject.name == "DoorFront") {
+                SceneTransitionManager.previousScene = SceneManager.GetActiveScene().name;
+                SceneManager.LoadScene("RoomTemporaryTP");
+            }
+            else if (this.gameObject.name == "DoorBack") {
+                SceneManager.LoadScene(SceneTransitionManager.previousScene);
+            }
         }
     }
 }

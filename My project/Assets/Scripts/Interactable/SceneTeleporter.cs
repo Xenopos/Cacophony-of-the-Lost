@@ -40,10 +40,7 @@ namespace Interactable {
         public void OnInteract() {
             Debug.Log("Interacted with Player");
 
-            SpriteRenderer playerSpriteRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
             PlayerStateManager playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>(); 
-            
-            playerSpriteRenderer.sortingOrder = 0;
             playerStateManager.SwitchState(playerStateManager.IdleState);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }

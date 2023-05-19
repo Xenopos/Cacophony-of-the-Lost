@@ -42,6 +42,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/TestSceneTp.unity
+    path: Assets/Scenes/RoomTemporaryTP.unity
     guid: f0bdf093fb2b43a4fa69b8921978545a
   m_configObjects: {}
