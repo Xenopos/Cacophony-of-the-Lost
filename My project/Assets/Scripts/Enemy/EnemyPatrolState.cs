@@ -41,6 +41,13 @@ public class EnemyPatrolState : EnemyBaseState {
             // Switch to idle state
             enemy.SwitchState(enemy.IdleState);
         }
+
+        if (enemy.IsPlayerAttacking() && Mathf.Abs(distanceFromPlayer) <= enemy.attackRadius) {
+            if (!enemy.IsPlayerFacingEnemy()) {
+                enemy.direction = !enemy.direction;
+            }
+            enemy.SwitchState(enemy.AttackState);
+        }
     }
 
     public override void OnTriggerEnter2D(EnemyStateManager enemy, Collider2D collider) {

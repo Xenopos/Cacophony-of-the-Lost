@@ -37,5 +37,12 @@ public class EnemyIdleState : EnemyBaseState {
             enemy.direction = !enemy.direction;
             enemy.SwitchState(enemy.PatrolState);
         }
+
+        if (enemy.IsPlayerAttacking() && Mathf.Abs(distanceFromPlayer) <= enemy.attackRadius) {
+            if (!enemy.IsPlayerFacingEnemy()) {
+                enemy.direction = !enemy.direction;
+            }
+            enemy.SwitchState(enemy.AttackState);
+        }
     }
 }

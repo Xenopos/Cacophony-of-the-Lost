@@ -71,6 +71,13 @@ public class EnemyStateManager : MonoBehaviour {
         currentState.EnterState(this);
     }
 
+    public bool IsPlayerAttacking() {
+        if (playerStateManager.currentState == playerStateManager.AttackState) {
+            return true;
+        }
+        return false;
+    }
+
     // Helper function to check if enemy is facing player
     public bool IsPlayerFacingEnemy() {
         return playerStateManager.direction != direction;
