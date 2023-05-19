@@ -43,6 +43,7 @@ namespace Interactable {
 
             if (this.gameObject.name == "DoorFront") {
                 SceneTransitionManager.previousScene = SceneManager.GetActiveScene().name;
+                SceneTransitionManager.previousPosition = GameObject.Find("Player").transform.position;
                 SceneManager.LoadScene("RoomTemporaryTP");
             }
             else if (this.gameObject.name == "DoorBack") {

@@ -8,5 +8,6 @@ using Enemy;
 namespace Scene {
     public class SceneTransitionManager: MonoBehaviour {
         public static string previousScene;
+        public static Vector2 previousPosition;
     }
 }
