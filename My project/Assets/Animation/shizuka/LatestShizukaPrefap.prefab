@@ -193,7 +193,7 @@ MonoBehaviour:
   - {x: 0.18459511, y: -0.45328474, z: 0}
   m_ShapePathHash: 546663993
   m_Mesh: {fileID: 0}
-  m_InstanceId: 44542
+  m_InstanceId: 36826
   m_LocalBounds:
     m_Center: {x: 0.16001606, y: -0.0879426, z: 0}
     m_Extent: {x: 0.45874882, y: 0.6560211, z: 0}
@@ -228,15 +228,15 @@ MonoBehaviour:
   rigidBody: {fileID: 1158436393651897623}
   animator: {fileID: 1158436393651897616}
   circleCollider: {fileID: 1603928300619933785}
+  healthBar: {fileID: 0}
   enemyStateManagers: []
   direction: 1
   currentSpeed: 0
-  maxHealth: 10
-  health: 0
   attackRadius: 4
   canAttack: 1
   attackCooldown: 4
   attackTimer: 1
+  maxSanityLevel: 0
 --- !u!1 &824266459353456961
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603928300586989492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15786743, y: 1.0655999, z: -1}
+  m_LocalPosition: {x: -0.15786743, y: 1.0655994, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -500,7 +500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603928300629538916}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15786743, y: 1.0655999, z: -1}
+  m_LocalPosition: {x: -0.15786743, y: 1.0655994, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -752,7 +752,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603928302106463922}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

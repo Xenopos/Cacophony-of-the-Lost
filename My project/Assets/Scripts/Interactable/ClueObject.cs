@@ -13,8 +13,13 @@ namespace Interactable {
         private bool hasInteracted = false;
         public bool isFound = false;
 
+
+        public GameObject E;
+
         public void Start() {
             collider = GetComponent<Collider2D>();
+            E.SetActive(true);
+
         }
 
         public void Update() {
@@ -44,9 +49,11 @@ namespace Interactable {
             if (!hasInteracted ) {
                 Debug.Log("Clue found!");
                 hasInteracted = true;
-                isFound = true;
+                isFound = true;                
+                E.SetActive(false);
             } else {
                 hasInteracted = false;
+                E.SetActive(true);
             }
         }
     }
