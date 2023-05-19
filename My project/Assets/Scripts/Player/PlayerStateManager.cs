@@ -27,8 +27,9 @@ public class PlayerStateManager : MonoBehaviour {
     // Player variables
     public bool direction; 
     public float currentSpeed;
-    public float maxHealth;
+    public static float maxHealth;
     public static float health = 10f;
+    public static float damage = 2f;
     public float attackRadius;
     public bool canAttack = true;
     public float attackCooldown = 2f;

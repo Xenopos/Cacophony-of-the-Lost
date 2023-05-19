@@ -4,7 +4,7 @@ using UnityEngine;
 using Player;
 
 public class PlayerAttackState : PlayerBaseState {
-    private float damage = 3f;
+    private float damage;
     private float attackCooldown = 0.6f; // Cooldown between attacks in seconds
     private float attackTimer = 0f; // Timer to keep track of cooldown
     private CircleCollider2D attackCollider;
@@ -13,6 +13,7 @@ public class PlayerAttackState : PlayerBaseState {
         Debug.Log("Attack");
 
         // Set variables
+        damage = PlayerStateManager.damage;
         attackCollider = player.circleCollider;
 
         // Set the player's animation to attack

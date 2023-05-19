@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 481746415}
   - component: {fileID: 481746418}
   m_Layer: 5
-  m_Name: bgImage (1)
+  m_Name: Suzune
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 481746416}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1964247584}
+        m_TargetAssemblyTypeName: Powerups.Powerup, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 481746415}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &481746416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +359,7 @@ GameObject:
   - component: {fileID: 1262570817}
   - component: {fileID: 1262570820}
   m_Layer: 5
-  m_Name: bgImage (2)
+  m_Name: Kayla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,7 +428,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1262570818}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1964247584}
+        m_TargetAssemblyTypeName: Powerups.Powerup, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1262570817}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1262570818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,6 +817,7 @@ GameObject:
   - component: {fileID: 1964247582}
   - component: {fileID: 1964247581}
   - component: {fileID: 1964247580}
+  - component: {fileID: 1964247584}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -884,3 +909,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1964247584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964247579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6414bc886f92de4dac20491993910af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
