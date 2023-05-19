@@ -47,9 +47,11 @@ namespace Interactable {
 
             if (isAtDestination1) {
                 GameObject.Find("Player").transform.position = destination2.position;
+                GameObject.Find("Kayla").transform.position = destination2.position;
                 isAtDestination1 = false;
             } else {
                 GameObject.Find("Player").transform.position = destination1.position;
+                GameObject.Find("Kayla").transform.position = destination1.position;
                 isAtDestination1 = true;
             }
         }
