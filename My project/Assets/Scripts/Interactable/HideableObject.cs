@@ -28,7 +28,7 @@ namespace Interactable {
             Physics2D.IgnoreCollision(collider, collidedObject);
 
             if (collidedObject.name == "Player") {
-                if (Input.GetKeyDown(KeyCode.H)) {
+                if (Input.GetKeyDown(KeyCode.E)) {
                     OnInteract();
                 }
             }
@@ -47,7 +47,7 @@ namespace Interactable {
 
             if (!hasInteracted && enemyStateManager.hasChased == false) {
                 hasInteracted = true;
-                playerSpriteRenderer.sortingOrder = 0;
+                playerSpriteRenderer.sortingOrder = 3;
                 playerStateManager.SwitchState(playerStateManager.HideState);
             } else {
                 hasInteracted = false;
