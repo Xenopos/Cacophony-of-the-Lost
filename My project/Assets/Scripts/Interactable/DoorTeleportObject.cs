@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Player;
 using Enemy;
 using Scene; 
+using System;
 
 namespace Interactable {
     public class DoorTeleportObject : MonoBehaviour {
@@ -12,6 +13,9 @@ namespace Interactable {
         [SerializeField]
         private ContactFilter2D filter;
         private List<Collider2D> collidedObjects = new List<Collider2D>(1);
+        public Transform destination1; // First teleportation destination
+        public Transform destination2; // Second teleportation destination
+        public bool isAtDestination1 = true;
 
         public void Start() {
             collider = GetComponent<Collider2D>();
@@ -41,13 +45,12 @@ namespace Interactable {
             PlayerStateManager playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>(); 
             playerStateManager.SwitchState(playerStateManager.IdleState);
 
-            if (this.gameObject.name == "DoorFront") {
-                SceneTransitionManager.previousScene = SceneManager.GetActiveScene().name;
-                SceneTransitionManager.previousPosition = GameObject.Find("Player").transform.position;
-                SceneManager.LoadScene("RoomTemporaryTP");
-            }
-            else if (this.gameObject.name == "DoorBack") {
-                SceneManager.LoadScene(SceneTransitionManager.previousScene);
+            if (isAtDestination1) {
+                GameObject.Find("Player").transform.position = destination2.position;
+                isAtDestination1 = false;
+            } else {
+                GameObject.Find("Player").transform.position = destination1.position;
+                isAtDestination1 = true;
             }
         }
     }

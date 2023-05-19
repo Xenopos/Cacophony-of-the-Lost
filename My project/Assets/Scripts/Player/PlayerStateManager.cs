@@ -51,13 +51,7 @@ public class PlayerStateManager : MonoBehaviour {
         foreach (GameObject enemy in enemyObjects) {
             enemyStateManagers.Add(enemy.GetComponent<EnemyStateManager>());
         }
-
-        // Initialize position
-        if (SceneTransitionManager.previousPosition != null) {
-            transform.position = SceneTransitionManager.previousPosition;
-        }
         
-
         // Initialize variables
         currentSpeed = 0f;
         direction = true;
