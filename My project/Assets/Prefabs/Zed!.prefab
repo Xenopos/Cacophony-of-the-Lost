@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4610605223633664167, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_Name
-      value: LatestZedPref
+      value: Zed!
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_RootOrder
@@ -17,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.752327
+      value: 0.93636703
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.2442453
+      value: 0.67285585
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0036449432
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -57,3 +57,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
+--- !u!1 &727434107329284750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4610605223633664167, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
+  m_PrefabInstance: {fileID: 3883356814743646761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1806118143971319644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727434107329284750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000e91b6119
+  m_ShapePath:
+  - {x: -0.3189659, y: -0.6724138, z: 0}
+  - {x: -0.3189659, y: 0.6724129, z: 0}
+  - {x: 0.3189659, y: 0.6724129, z: 0}
+  - {x: 0.3189659, y: -0.6724138, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -63418
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000047683716, z: 0}
+    m_Extent: {x: 0.3189659, y: 0.67241335, z: 0}
