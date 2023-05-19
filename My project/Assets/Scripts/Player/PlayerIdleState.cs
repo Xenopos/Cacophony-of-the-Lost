@@ -24,12 +24,6 @@ public class PlayerIdleState : PlayerBaseState {
 
     public override void UpdateState(PlayerStateManager player) {
         if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1) {
-            if (Input.GetAxisRaw("Horizontal") == 1) {
-                player.direction = true;
-            } else {
-                player.direction = false;
-            }
-            
             if (Input.GetKey(KeyCode.LeftShift)) {
                 player.SwitchState(player.RunState);
             }

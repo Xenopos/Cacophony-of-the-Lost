@@ -74,8 +74,6 @@ public class PlayerStateManager : MonoBehaviour {
     }
 
     public void FixedUpdate() {
-        Debug.Log("Player direction: " + direction);
-        
         if (!canAttack) {
             attackTimer += Time.deltaTime;
             if (attackTimer >= attackCooldown) {
