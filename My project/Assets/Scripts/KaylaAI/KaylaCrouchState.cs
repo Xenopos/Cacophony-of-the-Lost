@@ -51,6 +51,11 @@ public class KaylaCrouchState : KaylaBaseState {
                 player.SwitchState(player.IdleState);
                 break;
 
+            case PlayerAttackState attackState:
+                player.SwitchState(player.CrouchState);
+                break;
+
+
             default:
                 player.animator.SetBool("isCrouching", false);
                 player.SwitchState(player.IdleState);

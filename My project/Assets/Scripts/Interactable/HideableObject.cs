@@ -39,9 +39,12 @@ namespace Interactable {
 
             SpriteRenderer playerSpriteRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
             PlayerStateManager playerStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>(); 
-            EnemyStateManager enemyStateManager = GameObject.Find("Zed!").GetComponent<EnemyStateManager>();
+            
+            // Get nearest enemy
+            GameObject nearestEnemy = FindNearestEnemy(this.gameObject);
+            EnemyStateManager enemyStateManager = nearestEnemy.GetComponent<EnemyStateManager>();
 
-            // Change player sorting layer to be behind object
+
             if (!hasInteracted && enemyStateManager.hasChased == false) {
                 hasInteracted = true;
                 playerSpriteRenderer.sortingOrder = 0;
@@ -53,5 +56,32 @@ namespace Interactable {
                 playerStateManager.SwitchState(playerStateManager.IdleState);
             }
         }
+
+        public GameObject FindNearestEnemy(GameObject targetObject) {
+            GameObject nearestEnemy = null;
+            float shortestDistance = Mathf.Infinity;
+            float searchRadius = 10f;
+
+            // Find all enemy objects or game entities
+            GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+
+            // Iterate through the enemy objects
+            foreach (GameObject enemyObject in enemyObjects)
+            {
+                // Calculate the distance between the target object and the current enemy object
+                float distance = Vector3.Distance(targetObject.transform.position, enemyObject.transform.position);
+
+                // Check if the distance is within the search radius and shorter than the current shortest distance
+                if (distance <= searchRadius && distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestEnemy = enemyObject;
+                }
+            }
+
+            return nearestEnemy;
+        }
     }
+
+    
 }

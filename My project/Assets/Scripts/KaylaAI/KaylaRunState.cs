@@ -39,6 +39,10 @@ public class KaylaRunState : KaylaBaseState {
                 player.SwitchState(player.CrouchState);
                 break;
 
+            case PlayerAttackState attackState:
+                player.SwitchState(player.CrouchState);
+                break;
+
             default:
                 player.SwitchState(player.IdleState);
                 break;

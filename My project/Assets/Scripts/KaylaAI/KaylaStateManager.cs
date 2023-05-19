@@ -31,7 +31,6 @@ public class KaylaStateManager : MonoBehaviour {
         animator = GetComponent<Animator>();
         suzuneStateManager = GameObject.Find("Player").GetComponent<PlayerStateManager>();
 
-
         // Initialize variables
         currentSpeed = 0f;
         direction = true;

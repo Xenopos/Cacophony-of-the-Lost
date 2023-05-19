@@ -93,11 +93,11 @@ public class EnemyStateManager : MonoBehaviour {
         Debug.Log("Enemy health: " + health);
         if (health <= 0) {
             Debug.Log("Enemy died");
-            // GetComponent<Collider2D>().enabled = false;
             animator.SetBool("isDead", true);
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
             this.enabled = false;
             PlayerStateManager.sanityLevel -= 5f;
+            hasChased = false;
             
             Debug.Log("Sanity level: " + PlayerStateManager.sanityLevel);
         }
