@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Player;
 using Scene;
+using UnityEngine.SceneManagement;
 
 public class PlayerStateManager : MonoBehaviour {
     // States 
@@ -125,7 +126,26 @@ public class PlayerStateManager : MonoBehaviour {
         Debug.Log("Player health: " + health);
         if (health <= 0) {
             Debug.Log("Player died");
+            ResetPlayer();
+            SetGameOver();
         }
+    }
+
+    public void SetGameOver() {
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public void ResetPlayer() {
+        // Reset player health
+        maxHealth = 10f;
+        health = maxHealth;
+
+        // Reset player sanity level
+        maxSanityLevel = 100f;
+        sanityLevel = maxSanityLevel;
+
+        // Reset player damage
+        damage = 3f;
     }
 
     public void UpdateHealthBar() {
