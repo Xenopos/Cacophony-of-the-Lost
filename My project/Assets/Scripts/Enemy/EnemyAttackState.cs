@@ -7,7 +7,6 @@ public class EnemyAttackState : EnemyBaseState {
     private float damage = 1f;
     private bool canAttack = true;
     private float attackCooldown = 2f; // Cooldown between attacks in seconds
-    private float attackTimer = 0f; // Timer to keep track of cooldown
     private CircleCollider2D attackCollider;
     private GameObject player;
 
@@ -24,9 +23,6 @@ public class EnemyAttackState : EnemyBaseState {
         enemy.rigidBody.velocity = Vector2.zero;
         enemy.currentSpeed = 0f;
 
-        // Set timer
-        attackTimer = 0f;
-
         // Set attack animation
         enemy.animator.SetBool("isAttacking", true);
     }
@@ -38,15 +34,16 @@ public class EnemyAttackState : EnemyBaseState {
     public override void UpdateState(EnemyStateManager enemy) {
         Debug.Log("Enemy attack colider enabled:");
         Debug.Log(attackCollider.enabled);
+       
         // Increase timer
-        attackTimer += Time.deltaTime;
+        enemy.attackTimer += Time.deltaTime;
 
         // Check if attack cooldown has been reached
-        if (attackTimer >= attackCooldown) {
+        if (enemy.attackTimer >= attackCooldown) {
             // Reset attack animation
 
             // Reset timer
-            attackTimer = 0f;
+            enemy.attackTimer = 0f;
 
             // Set canAttack to true
             canAttack = true;
@@ -68,8 +65,8 @@ public class EnemyAttackState : EnemyBaseState {
     }   
 
     public override void OnTriggerEnter2D(EnemyStateManager enemy, Collider2D collision) {        
-        if (collision.GetComponent<BoxCollider2D>() != null) {
-            if (collision.CompareTag("Player")) {
+        if (collision.CompareTag("Player")) {
+            if (canAttack) {
                 Debug.Log("Enemy is attacking player for real!");
 
                 // Damage player
