@@ -6,6 +6,7 @@ using Player;
 using Scene;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerStateManager : MonoBehaviour {
     // States 
     public PlayerBaseState currentState;
@@ -160,7 +161,7 @@ public class PlayerStateManager : MonoBehaviour {
     }
 
     public void SetGameOver() {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("Mangamandaa");
     }
 
     public void ResetPlayer() {

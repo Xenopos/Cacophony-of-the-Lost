@@ -7,9 +7,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 863817359784655434, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
+      propertyPath: m_Size.x
+      value: 0.55218124
+      objectReference: {fileID: 0}
+    - target: {fileID: 863817359784655434, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0072231293
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352203371136785246, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
+      propertyPath: attackRadius
+      value: 1.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4610605223633664167, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_Name
       value: Zed!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039470102602505121, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
+      propertyPath: m_Radius
+      value: 0.52068394
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039470102602505121, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.23269969
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_RootOrder
@@ -17,11 +37,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.93636703
+      value: 34.77
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.67285585
+      value: 14.66
       objectReference: {fileID: 0}
     - target: {fileID: 7393471142481942930, guid: 6d5dabc117c7cc74497bede5ee962705, type: 3}
       propertyPath: m_LocalPosition.z
@@ -88,7 +108,7 @@ MonoBehaviour:
   - {x: 0.3189659, y: -0.6724138, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -63418
+  m_InstanceId: -78970
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000047683716, z: 0}
     m_Extent: {x: 0.3189659, y: 0.67241335, z: 0}

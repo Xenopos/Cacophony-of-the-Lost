@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Obrien/Obrien.unity
     guid: a2c3c6390ba485744ab63a12b401215e
   - enabled: 1
+    path: Assets/Scenes/Obrien/obriencut.unity
+    guid: c885b6a9221210d4895531b8042bf787
+  - enabled: 1
     path: Assets/Scenes/Obrien/Post Obrien.unity
     guid: c871508919c711042b38c1cc76ca1010
   - enabled: 1

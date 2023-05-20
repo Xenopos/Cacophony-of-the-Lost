@@ -44,13 +44,13 @@ public class Sanity_Cutscene : MonoBehaviour
     {
         float videolength = 14f;
         yield return new WaitForSeconds(videolength);
-                           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
         IEnumerator WaitforVideoEnd3()
     {
         float videolengthr = 44f;
         yield return new WaitForSeconds(videolengthr);
-                           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
