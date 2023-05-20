@@ -40,6 +40,10 @@ public class PlayerStateManager : MonoBehaviour {
     public static float sanityLevel = 100f;
     public float maxSanityLevel;
 
+    // Death timer
+    private float currentTime;    // Current time of the timer
+    private bool isTimerRunning;
+
     public void Start() {  
         // Initialize components
         rigidBody = GetComponent<Rigidbody2D>();
@@ -126,6 +130,30 @@ public class PlayerStateManager : MonoBehaviour {
         Debug.Log("Player health: " + health);
         if (health <= 0) {
             Debug.Log("Player died");
+
+            animator.SetBool("isDead", true);
+            DeathTimer();
+        }
+    }
+
+    private void DeathTimer() {
+        currentTime = 5f;
+        isTimerRunning = true;
+        StartCoroutine(DeathTimerCoroutine());
+    }
+
+    private IEnumerator DeathTimerCoroutine() {
+        Debug.Log("Timer has started!");
+        while (isTimerRunning && currentTime > 0) {
+            Debug.Log("Current time: " + currentTime);
+            yield return new WaitForSeconds(1f);
+            currentTime--;
+        }
+
+        if (currentTime <= 0) {
+            isTimerRunning = false;
+            Debug.Log("Timer has finished!");
+
             ResetPlayer();
             SetGameOver();
         }
@@ -146,6 +174,14 @@ public class PlayerStateManager : MonoBehaviour {
 
         // Reset player damage
         damage = 3f;
+
+        // Reset animation
+        animator.SetBool("isDead", false);
+        animator.SetBool("isAttacking", false);
+        animator.SetBool("isHiding", false);
+        animator.SetBool("isCrouching", false);
+
+        currentSpeed = 0f;
     }
 
     public void UpdateHealthBar() {

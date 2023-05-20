@@ -69,18 +69,15 @@ public class EnemyAttackState : EnemyBaseState {
 
     public override void OnTriggerEnter2D(EnemyStateManager enemy, Collider2D collision) {        
         if (collision.GetComponent<BoxCollider2D>() != null) {
-            Debug.Log("Enemy is attacking player!");
             if (collision.CompareTag("Player")) {
-                if (canAttack) {
-                    Debug.Log("Enemy is attacking player for real!");
+                Debug.Log("Enemy is attacking player for real!");
 
-                    // Damage player
-                    enemy.playerStateManager.TakeDamage(damage);
+                // Damage player
+                enemy.playerStateManager.TakeDamage(damage);
 
-                    // Set canAttack to false and disable attack colider to prevent multiple attacks
-                    canAttack = false;
-                    attackCollider.enabled = false;
-                }    
+                // Set canAttack to false and disable attack colider to prevent multiple attacks
+                canAttack = false;
+                attackCollider.enabled = false;            
             }
         }
     }
