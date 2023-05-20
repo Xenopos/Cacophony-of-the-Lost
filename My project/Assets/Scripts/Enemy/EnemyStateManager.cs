@@ -28,10 +28,12 @@ public class EnemyStateManager : MonoBehaviour {
     public bool hasChased;
 
     public float patrolRadius = 5f;
-    public float attackRadius = 1.4f;
+    public float attackRadius = 1f;
     public float patrolSpeed = 3f;
     public float chaseSpeed = 5f;
     public float deathTimer;
+
+    public float attackTimer = 0f; // Timer to keep track of cooldown
 
     public void Start() {
         // Initialize components
