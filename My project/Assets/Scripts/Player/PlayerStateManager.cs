@@ -161,7 +161,7 @@ public class PlayerStateManager : MonoBehaviour {
     }
 
     public void SetGameOver() {
-        SceneManager.LoadScene("Mangamandaa");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ResetPlayer() {

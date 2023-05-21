@@ -12,8 +12,7 @@ public class Sanity_Cutscene : MonoBehaviour
 
     void Start()
     {
-    LowSan.enabled = false;
-    HighSan.enabled = false;
+
         end();
     }
 
@@ -44,13 +43,13 @@ public class Sanity_Cutscene : MonoBehaviour
     {
         float videolength = 14f;
         yield return new WaitForSeconds(videolength);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Alingal");
     }
         IEnumerator WaitforVideoEnd3()
     {
         float videolengthr = 44f;
         yield return new WaitForSeconds(videolengthr);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Alingalalter");
     }
 
 }

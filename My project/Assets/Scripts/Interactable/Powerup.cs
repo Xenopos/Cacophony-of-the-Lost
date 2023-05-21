@@ -12,6 +12,7 @@ namespace Powerups {
             
             if (button.name == "Suzune") {
                 PlayerStateManager.damage += 2f;
+                PlayerStateManager.sanityLevel -= 10f;
                 Debug.Log("Suzune powerup: " + PlayerStateManager.damage + " damage");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             } else {
@@ -19,7 +20,7 @@ namespace Powerups {
                 PlayerStateManager.maxHealth += 1f;
 
                 Debug.Log("Kayla powerup: " + PlayerStateManager.health + " health");
-                            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
     }

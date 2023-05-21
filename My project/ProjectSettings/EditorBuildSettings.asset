@@ -45,6 +45,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Likod Cutscene.unity
     guid: da6de5d05fa6b504fb7e5b1770888a61
   - enabled: 1
+    path: Assets/Scenes/Alingalalter.unity
+    guid: 8f237dad03373da4f8f9aeacf7ff7715
+  - enabled: 1
     path: Assets/Scenes/Alingal.unity
     guid: 5dcdabbfb533ee14eb1f644ae70e36f5
   - enabled: 1
